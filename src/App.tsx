@@ -1,18 +1,28 @@
-import ListGroup from "./components/ListGroup";
+import { useState } from "react";
+import { CITIES } from "./data/cities";
+import { CityList } from "./components/CityList";
+import { CityDetail } from "./components/CityDetail";
+import "./App.css";
 
 function App() {
-  let items = ["New York", "San Francisco", "Tokyo", "London", "Paris"];
+  const [selectedCityId, setSelectedCityId] = useState(CITIES[0].id);
+  const selectedCity = CITIES.find((city) => city.id === selectedCityId)!;
 
-  const handleSelectItem = (item: string) => {
-    console.log(item);
-  };
   return (
-    <div>
-      <ListGroup
-        items={items}
-        heading="Cities"
-        onSelectItem={handleSelectItem}
-      />
+    <div className="container py-4">
+      <h1 className="mb-4">🌍 City Guide</h1>
+      <div className="row">
+        <div className="col-md-4">
+          <CityList
+            cities={CITIES}
+            selectedCityId={selectedCityId}
+            onSelectCity={(city) => setSelectedCityId(city.id)}
+          />
+        </div>
+        <div className="col-md-8">
+          <CityDetail city={selectedCity} />
+        </div>
+      </div>
     </div>
   );
 }

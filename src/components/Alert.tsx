@@ -1,3 +1,3 @@
-function ALert() {}
+function Alert() {}
 
 export default Alert;
